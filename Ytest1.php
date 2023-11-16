@@ -32,8 +32,8 @@ session_start();  // 세션을 사용하기 위한 시작 선언 1.8
 
     <section id="content">
         <?php
-        // 초기에는 양식 페이지를 로드
-        include 'Ytest1_load1.php?category=양식';
+        // 초기에는 한식 페이지를 로드
+        include 'Ytest1_load1.php?category=한식';
         ?>
     </section>
 
@@ -43,13 +43,25 @@ session_start();  // 세션을 사용하기 위한 시작 선언 1.8
 
         // 다음 버튼 클릭 시 다음 카테고리 로드
         document.getElementById("nextButton").addEventListener("click", function () {
-            loadCategory("다음 카테고리");  // TODO: 다음 카테고리를 서버에서 결정하도록 수정
+            loadNextCategory();
         });
 
         // 이전 버튼 클릭 시 이전 카테고리 로드
         document.getElementById("prevButton").addEventListener("click", function () {
-            loadCategory("이전 카테고리");  // TODO: 이전 카테고리를 서버에서 결정하도록 수정
+            loadPrevCategory();
         });
+
+        // 초기에는 다음 버튼만 활성화
+        function loadNextCategory() {
+            loadCategory("양식");
+            document.getElementById("prevButton").disabled = false;
+        }
+
+        // 한식 페이지에서는 이전 버튼을 비활성화
+        function loadPrevCategory() {
+            loadCategory("한식");
+            document.getElementById("prevButton").disabled = true;
+        }
     </script>
 </body>
 
