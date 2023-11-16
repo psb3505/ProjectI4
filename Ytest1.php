@@ -1,3 +1,7 @@
+<?php
+session_start();  // 세션을 사용하기 위한 시작 선언
+?>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -43,11 +47,47 @@
                 echo "<input type='radio' name='{$currentCategory}_{$i}' value='매우 좋아요'>매우 좋아요";
                 echo "<br>";
             }
+
+            // "한식" 이외의 카테고리에서는 "이전" 버튼 표시
+            if ($currentCategory != "한식") {
+                echo "<input type='submit' name='prevButton' value='이전'>";
+            }
+
+            // "일식"에서는 "완료" 버튼 표시
+            if ($currentCategory == "일식") {
+                echo "<input type='submit' name='completeButton' value='완료'>";
+            } else {
+                // "일식"이 아닌 경우에는 "다음" 버튼 표시
+                echo "<input type='submit' name='nextButton' value='다음'>";
+            }
             ?>
-            <br>
-            <input type="submit" value="제출">
         </form>
+
+        <?php
+        // "이전" 버튼이 눌렸을 경우 처리
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['prevButton'])) {
+            $_SESSION['currentStep']--;  // 이전 단계로 이동
+            header("Location: Ytest1.php");  // 현재 페이지를 다시 로드하여 이전 단계를 표시
+            exit();
+        }
+
+        // "완료" 버튼이 눌렸을 경우 처리
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['completeButton'])) {
+            $_SESSION['currentStep']++;  // 다음 단계로 이동
+            header("Location: result.php");  // 결과 페이지로 이동
+            exit();
+        }
+
+        // "다음" 버튼이 눌렸을 경우 처리
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nextButton'])) {
+            $_SESSION['currentStep']++;  // 다음 단계로 이동
+            header("Location: Ytest1.php");  // 현재 페이지를 다시 로드하여 다음 단계를 표시
+            exit();
+        }
+        ?>
     </section>
 </body>
 
 </html>
+
+// 1.6
