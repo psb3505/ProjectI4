@@ -16,16 +16,22 @@
     <section>
         <h2>선호도 조사</h2>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            <label for="food">음식 선택:</label>
-            <select name="food" id="food" required>
-                <option value="피자">피자</option>
-                <option value="스테이크">스테이크</option>
-                <option value="초밥">초밥</option>
-                <!-- 다른 음식 옵션 추가 -->
-            </select>
-            <br>
-            <label for="rating">선호도 (1부터 5까지):</label>
-            <input type="number" name="rating" id="rating" min="1" max="5" required>
+            <?php
+            $foodCategories = array("한식", "양식", "중식", "일식");
+            $ratings = array("못 먹어요", "싫어요", "보통이에요", "좋아요", "매우 좋아요");
+
+            foreach ($foodCategories as $category) {
+                echo "<h3>{$category}</h3>";
+                for ($i = 1; $i <= 10; $i++) {
+                    echo "<label for='{$category}_{$i}'>{$i}.</label>";
+                    echo "<select name='{$category}_{$i}' id='{$category}_{$i}' required>";
+                    foreach ($ratings as $rating) {
+                        echo "<option value='{$rating}'>{$rating}</option>";
+                    }
+                    echo "</select><br>";
+                }
+            }
+            ?>
             <br>
             <input type="submit" value="제출">
         </form>
