@@ -4,31 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Ytest1.css">
     <title>음식 선호도 조사</title>
-
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-        }
-
-        header {
-            background-color: orange;
-            padding: 10px;
-            text-align: center;
-            color: white;
-        }
-
-        section {
-            text-align: center;
-            padding: 20px;
-        }
-
-        h2 {
-            color: orange;
-        }
-    </style>
 </head>
 
 <body>
