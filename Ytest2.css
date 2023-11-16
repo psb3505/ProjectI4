@@ -15,3 +15,12 @@ section {
     text-align: center;
     padding: 20px;
 }
+
+form {
+    display: inline-block;
+    text-align: left;
+}
+
+h3 {
+    margin-top: 20px;
+}

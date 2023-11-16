@@ -27,3 +27,13 @@ if ($nextCategoryIndex < count($foodCategories)) {
     $_SESSION['currentCategory'] = $foodCategories[$nextCategoryIndex];
 }
 ?>
+
+
+label 보단 radio로 하고 싶어
+그리고 숫자 순서와 함께 그림 파일을 보여줄거야, 그림 파일은 나중에 추가할 거지만 기능에 넣어줘
+
+한식 조사를 끝나면, 양식 검사 화면으로, 양식 검사가 끝나면 중식 검사 화면으로, 중식 검사가 끝나면 일식 검사 화면으로 넘어가게 해줘
+양식 다음 중식, 중식 다음은 일식으로 가게 해줘
+
+마지막 단계에서는 완료 버튼을 누를 수 있게 해주고,
+한식을 제외한 나머지 단계에서는 이전 버튼을 누르면 이전 단계로 돌아갈 수 있게 해줘
