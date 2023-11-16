@@ -23,12 +23,14 @@
             foreach ($foodCategories as $category) {
                 echo "<h3>{$category}</h3>";
                 for ($i = 1; $i <= 10; $i++) {
-                    echo "<label for='{$category}_{$i}'>{$i}.</label>";
-                    echo "<select name='{$category}_{$i}' id='{$category}_{$i}' required>";
-                    foreach ($ratings as $rating) {
-                        echo "<option value='{$rating}'>{$rating}</option>";
-                    }
-                    echo "</select><br>";
+                    $imageName = "{$category}_{$i}.jpg";  // 나중에 추가할 이미지 파일 이름
+                    echo "<label for='{$category}_{$i}'>{$i}. <img src='{$imageName}' alt='{$category} {$i}' width='50'></label>";
+                    echo "<input type='radio' name='{$category}_{$i}' id='{$category}_{$i}' value='못 먹어요' required>못 먹어요";
+                    echo "<input type='radio' name='{$category}_{$i}' value='싫어요'>싫어요";
+                    echo "<input type='radio' name='{$category}_{$i}' value='보통이에요'>보통이에요";
+                    echo "<input type='radio' name='{$category}_{$i}' value='좋아요'>좋아요";
+                    echo "<input type='radio' name='{$category}_{$i}' value='매우 좋아요'>매우 좋아요";
+                    echo "<br>";
                 }
             }
             ?>
