@@ -1,5 +1,59 @@
 <?php
-session_start();  // 세션을 사용하기 위한 시작 선언 1.8
+session_start();  // 세션을 사용하기 위한 시작 선언
+
+
+/*
+
+<script>
+        function loadCategory(category) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById("content").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.open("GET", "Ytest1_load1.php?category=" + category, true);
+            xhr.send();
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // 초기에는 이전 버튼을 비활성화
+            var prevButton = document.getElementById("prevButton");
+            var nextButton = document.getElementById("nextButton");
+
+            if (prevButton && nextButton) {
+                prevButton.disabled = true;
+
+                // 다음 버튼 클릭 시 다음 카테고리 로드
+                nextButton.addEventListener("click", function () {
+                    loadNextCategory();
+                });
+
+                // 이전 버튼 클릭 시 이전 카테고리 로드
+                prevButton.addEventListener("click", function () {
+                    loadPrevCategory();
+                });
+
+                // 초기에는 다음 버튼만 활성화
+                function loadNextCategory() {
+                    loadCategory("양식");
+                    prevButton.disabled = false;
+                }
+
+                // 한식 페이지에서는 이전 버튼을 비활성화
+                function loadPrevCategory() {
+                    loadCategory("한식");
+                    prevButton.disabled = true;
+                }
+
+                // 초기에 한식 페이지 로드
+                loadCategory("한식");
+            } else {
+                console.error("Buttons not found");
+            }
+        });
+    </script>
+*/
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +76,41 @@ session_start();  // 세션을 사용하기 위한 시작 선언 1.8
             xhr.open("GET", "Ytest1_load1.php?category=" + category, true);
             xhr.send();
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // 초기에는 이전 버튼을 비활성화
+            var prevButton = document.getElementById("prevButton");
+            var nextButton = document.getElementById("nextButton");
+
+            if (prevButton && nextButton) {
+                prevButton.disabled = true;
+
+                // 다음 버튼 클릭 시 다음 카테고리 로드
+                nextButton.addEventListener("click", function () {
+                    loadNextCategory();
+                });
+
+                // 이전 버튼 클릭 시 이전 카테고리 로드
+                prevButton.addEventListener("click", function () {
+                    loadPrevCategory();
+                });
+
+                // 초기에는 다음 버튼만 활성화
+                function loadNextCategory() {
+                    loadCategory("양식");
+                    prevButton.disabled = false;
+                }
+
+                // 한식 페이지에서는 이전 버튼을 비활성화
+                function loadPrevCategory() {
+                    loadCategory("한식");
+                    prevButton.disabled = true;
+                }
+
+                // 초기에 한식 페이지 로드
+                loadCategory("한식");
+            }
+        });
     </script>
 </head>
 
@@ -31,38 +120,10 @@ session_start();  // 세션을 사용하기 위한 시작 선언 1.8
     </header>
 
     <section id="content">
-        <?php
-        // 초기에는 한식 페이지를 로드
-        include 'Ytest1_load1.php?category=한식';
-        ?>
+        <!-- 초기에는 아무 내용이 없음 -->
     </section>
-
-    <script>
-        // 초기에는 이전 버튼을 비활성화
-        document.getElementById("prevButton").disabled = true;
-
-        // 다음 버튼 클릭 시 다음 카테고리 로드
-        document.getElementById("nextButton").addEventListener("click", function () {
-            loadNextCategory();
-        });
-
-        // 이전 버튼 클릭 시 이전 카테고리 로드
-        document.getElementById("prevButton").addEventListener("click", function () {
-            loadPrevCategory();
-        });
-
-        // 초기에는 다음 버튼만 활성화
-        function loadNextCategory() {
-            loadCategory("양식");
-            document.getElementById("prevButton").disabled = false;
-        }
-
-        // 한식 페이지에서는 이전 버튼을 비활성화
-        function loadPrevCategory() {
-            loadCategory("한식");
-            document.getElementById("prevButton").disabled = true;
-        }
-    </script>
 </body>
 
 </html>
+
+
