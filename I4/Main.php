@@ -1,5 +1,6 @@
 <?php
     ini_set('memory_limit', '256M');
+    include './Database.php';
 
     // JSON 파일 읽기
     $json_data = file_get_contents('cosine_sim.json');
@@ -22,19 +23,20 @@
 
     function get_idx($food_name, $foods) {
         foreach ($foods as $key => $value) {
-            if ($value['CKG_NM'] == $food_name) {
+            // trim 함수를 사용하여 앞뒤의 공백을 제거하고 비교
+            if (trim($value['CKG_NM']) == trim($food_name)) {
                 return $key;
             }
         }
         return -1; // If not found
-    }
+    }    
 
 
     function get_recommendations($food_name, $foods, $cosine_sim) {
         try {
             $idx = get_idx($food_name, $foods);
             if ($idx === -1) {
-                    echo "Error: Food '$food_name_to_find' not found.";
+                    echo "Error: Food '$food_name' not found.";
                     exit(1);
                 }
         } catch (Exception $e) {
@@ -80,17 +82,16 @@
         foreach ($food_indices as $i) {
             $food_names[] = $ckg_values[$i];
         }
-        
 
         return $food_names;
     }
 
     // 예시 사용법
-    $food_name_from_php = "토마토스파게티";  // PHP에서 전달 받은 음식 이름
+    $food_name_from_php = getFoodName();  // Database.php에서 전달 받은 음식 이름
+
     $food_names = get_recommendations($food_name_from_php, $foods, $cosine_sim);
 
     foreach ($food_names as $name) {
         echo $name . "<br>";
     }
-
 ?>
