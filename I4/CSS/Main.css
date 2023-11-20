@@ -6,16 +6,34 @@
 ul, li {
     list-style: none;
 }
+.title {
+    background-image: url('../Image/title.jpg');
+    background-size: cover; /* 배경 이미지를 요소에 맞게 늘리거나 축소 */
+    background-position: center; /* 배경 이미지의 위치를 가운데 정렬 */
+    color: #fff;
+    text-align: center;
+    padding: 20px 0; /* 위아래 여백을 늘림 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.titlename {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0; /* 기본적인 마진 제거 */
+    padding: 10px; /* 내부 여백을 추가 */
+    background-color: rgba(0, 0, 0, 0.7); /* 제목의 배경 색상과 투명도 설정 */
+    border-radius: 5px; /* 테두리 모서리를 둥글게 만듦 */
+}
 
 [name="slide"] {display: none;}
 .slidebox {
     max-width: 1000px;
     width: 100%;
-    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
-}
-.foodImage {
-    max-width: 100%;
 }
 .slidebox .slidelist {
     white-space: nowrap;
@@ -39,8 +57,20 @@ ul, li {
     cursor: pointer;
 }
 .slideitem div {
+    position: relative;
+    text-align: center;
     cursor: pointer;
 }
+.foodImage {
+    width: 200px; /* 이미지 가로 크기 조절 */
+    height: 200px; /* 이미지 세로 크기 조절 */
+    margin-bottom: 20px; /* 이미지와 제목 사이 간격 늘리기 */
+}
+.foodName {
+    font-size: 20px;
+    margin: 0;
+}
+
 label.left {
     left: 20px;
     background-color: #5F5F5F;
@@ -64,10 +94,6 @@ label.right {
 [id="slide04"]:checked ~ .slidelist .slideitem {transform: translateX(-300%);}
 [id="slide05"]:checked ~ .slidelist .slideitem {transform: translateX(-400%);}
 
-.slideitem h2 {
-    font-size: 20px; /* or any size you want */
-}
-
 /* 모달 팝업 스타일 */
 .modal {
     display: none;
@@ -80,6 +106,7 @@ label.right {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
 }
+
 .modal-content {
     background-color: #fefefe;
     margin: 8% auto;
@@ -90,16 +117,34 @@ label.right {
     max-width: 700px;
     position: relative;
     text-align: center;
-    overflow-y: auto; /* 세로 스크롤 활성화 */
-    max-height: 70vh; /* 모달의 최대 높이를 설정, 필요에 따라 조절 가능 */
+    overflow-y: auto;
+    max-height: 70vh;
+    border-radius: 10px; /* 모달의 테두리를 둥글게 만듦 */
 }
+
 .close-modal-btn {
     position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px;
+    top: 10px;
+    right: 10px;
     font-size: 20px;
     cursor: pointer;
+    color: #333; /* 닫기 버튼 색상 변경 */
+}
+
+.foodContent {
+    margin-bottom: 20px; /* 각 항목의 아래 여백 추가 */
+}
+
+.foodContent i {
+    font-size: 36px; /* 아이콘 크기 조절 */
+    margin-bottom: 10px; /* 아이콘의 아래 여백 추가 */
+    color: #333; /* 아이콘 색상 변경 */
+}
+
+.foodContent p {
+    margin: 0;
+    font-size: 18px;
+    color: #333; /* 텍스트 색상 변경 */
 }
 
 center {
@@ -114,4 +159,40 @@ center {
 .foodContent i {
     font-size: 2em; /* 아이콘 크기 조절 */
     margin-bottom: 20px; /* 아이콘 아래 간격 조절 */
+}
+
+/* 메뉴바 */
+.nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff; /* 메뉴 바 배경 색상을 흰색으로 변경 */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    z-index: 1000; /* 다른 요소 위로 메뉴 바를 올리기 위해 z-index 설정 */
+}
+
+.navWrap {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    list-style: none;
+    margin: 0;
+}
+
+.navWrap li {
+    text-align: center;
+    color: #333; /* 진한 회색으로 변경 */
+    cursor: pointer;
+}
+
+.navWrap i {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.navWrap p {
+    margin: 0;
+    font-size: 14px; /* 텍스트 크기 조절 */
 }
