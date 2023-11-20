@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+        <link rel="stylesheet" href="./CSS/Main.css">
+        <title>음식추천</title>
+    </head>
+    <body onload="foodNameFiltering()">
+        <section class="title">
+            <div class="titlename">
+                오늘의 추천
+            </div>
+        </section>
+        <section class="slidebox">
+            <input type="radio" name="slide" id="slide01" checked>
+            <input type="radio" name="slide" id="slide02">
+            <input type="radio" name="slide" id="slide03">
+            <input type="radio" name="slide" id="slide04">
+            <input type="radio" name="slide" id="slide05">
+            <ul class="slidelist">
+                <li class="slideitem">
+                    <div>
+                        <label for="slide05" class="left"></label>
+                        <label for="slide02" class="right"></label>
+                        <a><img class="foodImage" src=""></a>
+                        <h2 class="foodName"></h2>  <!-- 이미지와 제목이 같은 div 내부에 위치 -->
+                    </div>
+                </li>
+                <li class="slideitem">
+                    <div>
+                        <label for="slide01" class="left"></label>
+                        <label for="slide03" class="right"></label>
+                        <a><img class="foodImage" src=""></a>
+                        <h2 class="foodName"></h2>  <!-- 이미지와 제목이 같은 div 내부에 위치 -->
+                    </div>
+                </li>
+                <li class="slideitem">
+                    <div>
+                        <label for="slide02" class="left"></label>
+                        <label for="slide04" class="right"></label>
+                        <a><img class="foodImage" src=""></a>
+                        <h2 class="foodName"></h2>  <!-- 이미지와 제목이 같은 div 내부에 위치 -->
+                    </div>
+                </li>
+                <li class="slideitem">
+                    <div>
+                        <label for="slide03" class="left"></label>
+                        <label for="slide05" class="right"></label>
+                        <a><img class="foodImage" src=""></a>
+                        <h2 class="foodName"></h2>  <!-- 이미지와 제목이 같은 div 내부에 위치 -->
+                    </div>
+                </li>
+                <li class="slideitem">
+                    <div>
+                        <label for="slide04" class="left"></label>
+                        <label for="slide01" class="right"></label>
+                        <a><img class="foodImage" src=""></a>
+                        <h2 class="foodName"></h2>  <!-- 이미지와 제목이 같은 div 내부에 위치 -->
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <script src="./JS/Main.js"></script>
+    </body>
+</html>

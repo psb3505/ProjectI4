@@ -1,5 +1,5 @@
 <?php
-    function getFoodName() {
+    function DBConnect() {
         // MySQL 서버에 연결
         $conn = mysqli_connect('azza.gwangju.ac.kr', 'dbuser191831', 'ce1234', 'db191831');
 
@@ -7,6 +7,12 @@
         if (!$conn) {
             die("연결 실패: " . mysqli_connect_error());
         }
+
+        return $conn;
+    }
+
+    function getFoodName() {
+        $conn = DBConnect();
 
         // $foodName 변수 초기화
         $foodName = '';
@@ -71,7 +77,7 @@
 
                 if ($selectResult && mysqli_num_rows($selectResult) > 0) {
                     while ($row = mysqli_fetch_assoc($selectResult)) {
-                        echo "음식명 : " . $row['name'] . "<br>";
+                        // echo "음식명 : " . $row['name'] . "<br>";
                         $foodName = $row['name'];
                 
                         // $foodName에 해당하는 음식을 추천으로 표시
@@ -100,5 +106,51 @@
 
         // $foodName 변수 반환
         return $foodName;
+    }
+
+    function getFoodImage($food_name) {
+        $conn = DBConnect();
+        
+        $food_data = array();
+        $food_names_string = '';
+
+        foreach ($food_name as $name) {
+            $food_names_string .= "'" . mysqli_real_escape_string($conn, $name) . "%', ";
+        }
+        
+        // 마지막에 추가된 콤마와 공백 제거
+        $food_names_string = rtrim($food_names_string, ', ');
+        
+        // 각 항목에 LIKE를 추가
+        $food_names_string = str_replace("',", "' OR name LIKE ", $food_names_string);
+        $food_names_string = "name LIKE " . $food_names_string;                      
+        
+        // $food_names_string을 출력해보면 '밥', '김', '국', '간장', '감자'와 같은 문자열이 생성됩니다.
+        // echo $food_names_string;
+
+        $sql = "SELECT food.name AS food_name, food_image.file_route
+                FROM food
+                LEFT OUTER JOIN food_image ON food.id = food_image.food_id
+                WHERE ($food_names_string)";
+
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $food_data[] = array(
+                    'food_name' => $row['food_name'],
+                    'file_route' => $row['file_route']
+                );
+            }
+            mysqli_free_result($result);
+        } else {
+            // Handle query error
+            die("Query failed: " . mysqli_error($conn));
+        }
+
+        // Close the connection
+        mysqli_close($conn);
+
+        return $food_data;
     }
 ?>
