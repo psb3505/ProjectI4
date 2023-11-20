@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
         <link rel="stylesheet" href="./CSS/Main.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
         <title>음식추천</title>
     </head>
     <body onload="foodNameFiltering()">
@@ -61,6 +62,23 @@
                 </li>
             </ul>
         </section>
+
+        <!-- 모달 팝업 컨테이너 -->
+        <div class="modal" id="commentModal">
+            <div class="modal-content">
+                <span class="close-modal-btn">&times;</span>
+                <center>
+                    <div class="foodContent">
+                        <i class="fas fa-store"></i>
+                        <p>주변 음식점</p>
+                    </div>
+                    <div class="foodContent">
+                        <i class="fas fa-utensils"></i>
+                        <p>레시피</p>
+                    </div>
+                </center>
+            </div>
+        </div>
 
         <script src="./JS/Main.js"></script>
     </body>
