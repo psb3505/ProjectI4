@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h2 {
+	 text-align: center;
+}
+
+.header {
+    background-color: #ff9900;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.surveyForm {
+	text-align: center;
+}
+
+.step-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.step {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+
+.now_step {
+	display: inline-block;
+    margin: 0 10px;
+    font-size: 18px;
+	color : orange;
+}
+
+.active-step {
+    color: #ff9900;
+    font-weight: bold;
+}

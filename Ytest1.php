@@ -120,7 +120,7 @@ session_start();  // 세션을 사용하기 위한 시작 선언
     </header>
 
     <section id="content">
-        <!-- 초기에는 아무 내용이 없음 -->
+        
     </section>
 </body>
 

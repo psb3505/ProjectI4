@@ -18,7 +18,7 @@
 
         <form action="process_Ytest2.php" method="post">
            <h3>한식</h3>
-<?php generateFoodOptions("korean"); ?>
+			<?php generateFoodOptions("korean"); ?>
 
 
             <h3>양식</h3>
