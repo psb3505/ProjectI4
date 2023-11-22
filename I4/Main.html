@@ -24,7 +24,6 @@
                 padding: 10px 20px;
                 border: none;
                 border-radius: 5px;
-                cursor: pointer;
                 display: flex;
                 align-items: center;
             }
@@ -41,7 +40,6 @@
             a {
                 text-decoration: none; /* 밑줄 제거 */
                 color: inherit; /* 기본 색상 유지 */
-                cursor: pointer; /* 포인터 커서로 변경 */
             }
         </style>
     </head>
@@ -138,9 +136,9 @@
                 <center>
                     <div class="foodContent" id="naverMapLink1">
                         <i class="fas fa-store"></i>
-                        <p>주변 음식점</p>
+                        <p>음식점</p>
                     </div>
-                    <div class="foodContent">
+                    <div class="foodContent" id="racipeLink">
                         <i class="fas fa-utensils"></i>
                         <p>레시피</p>
                     </div>
@@ -174,6 +172,18 @@
             setInterval(function () {
                 localStorage.removeItem('foodData');
             }, 2 * 60 * 60 * 1000); // 2시간(밀리초 단위)
+
+            var racipeLink = document.getElementById('racipeLink');
+
+            if (racipeLink) {
+                racipeLink.addEventListener('click', function () {
+                    // foodNameText 값을 가져와서 URL에 추가
+                    var url = './Racipe.html?foodName=' + encodeURIComponent(foodNameText);
+                    window.location.href = url;
+                });
+            } else {
+                console.error("Element with id 'racipeLink' not found.");
+            }
         </script>
     </body>
 </html>
