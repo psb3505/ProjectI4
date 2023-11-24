@@ -1,34 +1,62 @@
+<!-- PHP 파일 (savePreferences.php) -->
+
 <?php
-// savePreferences.php
+@session_start();
 
-$servername = "azza.gwangju.ac.kr";
-$username = "dbuser191831";
-$password = "ce1234";
-$dbname = "db191831";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// 로그인 세션이 없으면 에러 응답
+if (!isset($_SESSION['ID'])) {
+    http_response_code(401);
+    exit("Unauthorized");
 }
 
-// 클라이언트에서 전송된 JSON 데이터 가져오기
-$data = json_decode(file_get_contents("php://input"), true);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $servername = "azza.gwangju.ac.kr";
+    $username = "dbuser191831";
+    $password = "ce1234";
+    $dbname = "db191831";
 
-// 사용자 ID (예시로 1로 설정)
-$user_id = 1;
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-// 데이터베이스에 응답 저장
-foreach ($data as $food_id => $rating) {
-    $query = "INSERT INTO preference_rating (user_id, food_id, rating) VALUES ('$user_id', '$food_id', '$rating')";
-    $result = $conn->query($query);
-
-    if (!$result) {
-        echo "Error: " . $conn->error;
+    if ($conn->connect_error) {
+        http_response_code(500);
+        exit("Connection failed: " . $conn->connect_error);
     }
+
+    // 사용자 ID
+    $user_id = $_SESSION['ID'];
+
+    // 전송된 데이터 디코딩
+    $requestData = json_decode(file_get_contents("php://input"), true);
+
+    // 각 라디오 버튼의 값 처리
+    foreach ($requestData as $data) {
+        $food_id = $data['food_id'];
+        $rating = $data['rating'];
+
+        // SQL 쿼리 실행 (preference_rating 테이블에 데이터 삽입)
+        $sql = "INSERT INTO preference_rating (user_id, food_id, rating) VALUES ('$user_id', '$food_id', '$rating')";
+
+        if ($conn->query($sql) !== TRUE) {
+            http_response_code(500);
+            exit("Error: " . $sql . "<br>" . $conn->error);
+        }
+    }
+	
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // ... (기존 코드)
+
+    $conn->close();
+
+    // 서버 응답에 대한 추가 정보를 JSON 형식으로 출력
+    echo json_encode(['status' => 'success', 'message' => 'Preferences saved successfully']);
+} else {
+    http_response_code(405);
+    exit("Method Not Allowed");
 }
 
-$conn->close();
-
-echo json_encode(['message' => 'Preferences saved successfully']);
+    $conn->close();
+} else {
+    http_response_code(405);
+    exit("Method Not Allowed");
+}
 ?>
