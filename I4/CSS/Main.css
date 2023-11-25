@@ -192,3 +192,37 @@ center {
     margin: 0;
     font-size: 14px; /* 텍스트 크기 조절 */
 }
+
+.reroll {
+    text-align: center;
+}
+
+#rerollBtn {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: #3498db;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+#rerollBtn span {
+    margin-left: 5px;
+}
+
+/* 모바일에서 터치 피드백 추가 */
+#rerollBtn:active {
+    background-color: #2980b9;
+}
+
+a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: inherit; /* 기본 색상 유지 */
+}

@@ -6,42 +6,6 @@
         <link rel="stylesheet" href="./CSS/Main.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
         <title>음식추천</title>
-
-        <style>
-            .reroll {
-                text-align: center;
-            }
-
-            #rerollBtn {
-                position: absolute;
-                top: 80%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                background-color: #3498db;
-                color: #fff;
-                font-size: 16px;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                display: flex;
-                align-items: center;
-            }
-
-            #rerollBtn span {
-                margin-left: 5px;
-            }
-
-            /* 모바일에서 터치 피드백 추가 */
-            #rerollBtn:active {
-                background-color: #2980b9;
-            }
-
-            a {
-                text-decoration: none; /* 밑줄 제거 */
-                color: inherit; /* 기본 색상 유지 */
-            }
-        </style>
     </head>
     <body onload="mainPageLoad()">
         <section class="title">
@@ -147,43 +111,5 @@
         </div>
 
         <script src="./JS/Main.js"></script>
-        <script>
-            function mainPageLoad() {
-                // 로컬 스토리지에서 데이터 확인
-                const storedData = localStorage.getItem('foodData');
-
-                if (storedData) {
-                    // 저장된 데이터가 있다면 사용
-                    const data = JSON.parse(storedData);
-                    foodNameWriteText(data);
-                } else {
-                    // 저장된 데이터가 없다면 서버에서 가져와서 사용
-                    foodNameFiltering();
-                }
-            }
-
-            // 리셋 버튼 클릭 시 로컬 스토리지에서 플래그 제거하여 다음에 페이지 로드시 함수가 다시 실행되도록 설정
-            document.getElementById('rerollBtn').addEventListener('click', function () {
-                localStorage.removeItem('foodData');
-                location.reload(); // 페이지 새로고침
-            });
-
-            // 2시간 간격으로 반복 실행
-            setInterval(function () {
-                localStorage.removeItem('foodData');
-            }, 2 * 60 * 60 * 1000); // 2시간(밀리초 단위)
-
-            var racipeLink = document.getElementById('racipeLink');
-
-            if (racipeLink) {
-                racipeLink.addEventListener('click', function () {
-                    // foodNameText 값을 가져와서 URL에 추가
-                    var url = './Racipe.html?foodName=' + encodeURIComponent(foodNameText);
-                    window.location.href = url;
-                });
-            } else {
-                console.error("Element with id 'racipeLink' not found.");
-            }
-        </script>
     </body>
 </html>

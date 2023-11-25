@@ -94,9 +94,21 @@ function getRacipeVideoAndContent() {
                     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
                     onYouTubeIframeAPIReady(); // 여기서 YouTube API 함수 호출
+                }else {
+                    // X인 경우 처리
+                    var playerDiv = document.getElementById('player');
+                
+                    // 이미지를 생성하고 속성을 설정
+                    var img = document.createElement('img');
+                    img.src = data[0].file_route; 
+                    img.alt = '이미지 준비중'; // 이미지 대체 텍스트 설정
+                    img.style.width = '100%'; // 너비 100%
+                    img.style.height = '250px'; // 높이 250px
+                
+                    // 이미지를 playerDiv에 추가
+                    playerDiv.appendChild(img);
                 }
                 resolve(data);
-                
             })
             .catch(error => {
                 reject(error);
