@@ -29,7 +29,7 @@ function onYouTubeIframeAPIReady() {
 
 // 4. API는 비디오 플레이어가 준비되면 아래의 function을 불러올 것이다.
 function onPlayerReady(event) {
-    console.log('Player is ready!');
+    // console.log('Player is ready!');
     event.target.playVideo();
 }
 
@@ -39,7 +39,7 @@ function onPlayerReady(event) {
 var done = false;
 function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING && !done) {
-        console.log('Player state changed:', event.data);
+        // console.log('Player state changed:', event.data);
         var duration = player.getDuration();
         
         // 전체 영상 시간만큼 재생 후 정지
@@ -85,13 +85,16 @@ function getRacipeVideoAndContent() {
                 videoIdLink = data[0].url;
                 console.log('videoIdLink:', videoIdLink);
 
-                tag = document.createElement('script');
+                createIngredientAndRacipeContent(data);
 
-                tag.src = "https://www.youtube.com/iframe_api";
-                firstScriptTag = document.getElementsByTagName('script')[0];
-                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                if(videoIdLink != 'X') {
+                    tag = document.createElement('script');
+                    tag.src = "https://www.youtube.com/iframe_api";
+                    firstScriptTag = document.getElementsByTagName('script')[0];
+                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-                onYouTubeIframeAPIReady(); // 여기서 YouTube API 함수 호출
+                    onYouTubeIframeAPIReady(); // 여기서 YouTube API 함수 호출
+                }
                 resolve(data);
                 
             })
@@ -101,6 +104,106 @@ function getRacipeVideoAndContent() {
     });
 }
 
-// function createIngredientAndRacipeContent() {
+function createIngredientAndRacipeContent(data) {
+    var racipeTitle = document.getElementById('racipeTitle');
+    var inbun = document.getElementById('inbun');
+    var cookTime = document.getElementById('cookTime');
+    var difficulty = document.getElementById('difficulty');
+    var ingredientArea = document.getElementById('ingredientArea');
+    var racipeContentArea = document.getElementById('racipeContentArea');
 
-// }
+    // 레시피 타이틀 및 레시피 세부 정보 출력
+    racipeTitle.textContent = data[0].title;
+
+    inbun.textContent = data[0].ckg_inbun_nm;
+    cookTime.textContent = data[0].ckg_timg_nm;
+    difficulty.textContent = data[0].ckg_dodf_nm;
+
+    // 레시피 재료 정보들 출력
+    // 정규식을 사용하여 '[ ]'로 묶인 그룹과 그 외의 내용을 추출
+    var matches = data[0].ckg_mtrl_cn.match(/\[([^\]]+)\]\s*([^[]+)/g);
+
+    matches.forEach(match => {
+        // '['와 ']' 사이의 내용을 추출하여 그룹으로 사용
+        var groupMatches = match.match(/\[([^\]]+)\]/g);
+
+        if (groupMatches) {
+            // 중복된 그룹명 제거
+            var uniqueGroups = Array.from(new Set(groupMatches));
+
+            uniqueGroups.forEach(group => {
+                var groupName = group.trim();
+
+                // div 태그 생성
+                var ingredientPart = document.createElement('div');
+                ingredientPart.className = 'ingredientPart';
+
+                // p 태그 생성
+                var paragraph = document.createElement('p');
+                paragraph.textContent = groupName;
+
+                // div에 p 태그 추가
+                ingredientPart.appendChild(paragraph);
+
+                // '|'로 이어진 문자열을 각각의 행으로 구분하여 table 생성
+                var ingredients = match.split(group)[1].trim().split('|');
+
+                // table 생성
+                var table = document.createElement('table');
+
+                ingredients.forEach(ingredient => {
+                    // 각 값의 앞뒤 공백 제거
+                    var trimmedIngredient = ingredient.trim();
+
+                    // 공백으로 분리
+                    var subIngredients = trimmedIngredient.split(' ');
+
+                    // tr 생성
+                    var tr = table.insertRow();
+
+                    subIngredients.forEach(subIngredient => {
+                        // 각 값의 앞뒤 공백 제거
+                        var trimmedSubIngredient = subIngredient.trim();
+
+                        // td 생성
+                        var td = tr.insertCell();
+                        td.textContent = trimmedSubIngredient;
+                    });
+                });
+
+                // table을 ingredientPart에 추가
+                ingredientPart.appendChild(table);
+
+                // ingredientPart을 ingredientArea에 추가
+                ingredientArea.appendChild(ingredientPart);
+            });
+        }
+    });
+
+    // 레시피 보여주기
+    // 각 값의 앞뒤 공백 제거
+    var trimmedRacipeContent = data[0].recipe_description.trim();
+    // 마지막 '/' 제거
+    if (trimmedRacipeContent.endsWith('/')) {
+        trimmedRacipeContent = trimmedRacipeContent.slice(0, -1);
+    }
+
+    // 공백으로 분리
+    var subRacipeContent = trimmedRacipeContent.split('/');
+
+    // ul 생성
+    var ul = document.createElement('ul');
+
+    subRacipeContent.forEach((content, index) => {
+        var li = document.createElement('li');
+        var span = document.createElement('span');
+        span.textContent = (index + 1).toString() + '. '; // 1.부터 시작하는 숫자 값을 span에 넣음
+        li.appendChild(span);
+        
+        var trimmedContent = content.trim();
+        li.textContent += trimmedContent; // 기존 li의 textContent에 새로운 내용 추가
+        ul.appendChild(li);
+    });
+
+    racipeContentArea.appendChild(ul);
+}
