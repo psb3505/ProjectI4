@@ -7,24 +7,26 @@ var videoIdLink;
 var player;
 function onYouTubeIframeAPIReady() {
     console.log('onYouTubeIframeAPIReady():', videoIdLink);
-    player = new YT.Player('player', {
-        height: '250',  //변경가능-영상 높이
-        width: '360',  //변경가능-영상 너비
-        videoId: `${videoIdLink}`,  //변경-영상ID
-        playerVars: {
-            'rel': 0,    //연관동영상 표시여부(0:표시안함)
-            'controls': 1,    //플레이어 컨트롤러 표시여부(0:표시안함)
-            'autoplay' : 0,   //자동재생 여부(1:자동재생 함, mute와 함께 설정)
-            'mute' : 1,   //음소거여부(1:음소거 함)
-            'loop' : 0,    //반복재생여부(1:반복재생 함)
-            'playsinline' : 1,    //iOS환경에서 전체화면으로 재생하지 않게
-            'playlist' : `${videoIdLink}`   //재생할 영상 리스트
-            },
-            events: {
-            'onReady': onPlayerReady, //onReady 상태일 때 작동하는 function이름
-            'onStateChange': onPlayerStateChange //onStateChange 상태일 때 작동하는 function이름
-        }
-    });
+    if (typeof YT !== 'undefined') {
+        player = new YT.Player('player', {
+            height: '250',  //변경가능-영상 높이
+            width: '360',  //변경가능-영상 너비
+            videoId: `${videoIdLink}`,  //변경-영상ID
+            playerVars: {
+                'rel': 0,    //연관동영상 표시여부(0:표시안함)
+                'controls': 1,    //플레이어 컨트롤러 표시여부(0:표시안함)
+                'autoplay' : 0,   //자동재생 여부(1:자동재생 함, mute와 함께 설정)
+                'mute' : 1,   //음소거여부(1:음소거 함)
+                'loop' : 0,    //반복재생여부(1:반복재생 함)
+                'playsinline' : 1,    //iOS환경에서 전체화면으로 재생하지 않게
+                'playlist' : `${videoIdLink}`   //재생할 영상 리스트
+                },
+                events: {
+                'onReady': onPlayerReady, //onReady 상태일 때 작동하는 function이름
+                'onStateChange': onPlayerStateChange //onStateChange 상태일 때 작동하는 function이름
+            }
+        });
+    }
 }
 
 // 4. API는 비디오 플레이어가 준비되면 아래의 function을 불러올 것이다.

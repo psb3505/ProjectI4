@@ -49,6 +49,7 @@ function foodNameFiltering() {
                 sessionStorage.setItem('foodData', JSON.stringify(data));
                 foodNameWriteText(data);
                 resolve(data);
+                
             })
             .catch(error => {
                 reject(error);
@@ -74,7 +75,7 @@ const images = document.querySelectorAll('.foodImage');
 images.forEach((image) => {
     image.addEventListener('click', function () {
         // 클릭된 이미지의 부모 요소를 찾습니다.
-        const parentDiv = this.closest('.slideitem');
+        const parentDiv = this.closest('.swiper-slide');
 
         // 부모 요소에서 h2를 찾습니다.
         const foodNameElement = parentDiv.querySelector('.foodName');

@@ -5,7 +5,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
         <link rel="stylesheet" href="./CSS/Main.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <title>음식추천</title>
+
+        <style>
+            .swiper {
+            width: 100%;
+            height: 380px;
+            text-align: center;
+            }
+            .swiper img {
+                width: 100%; /* 이미지가 부모 요소에 맞춰질 수 있도록 최대 너비를 100%로 설정 */
+                height: 250px; /* 가로 세로 비율을 유지하면서 이미지 크기 조절 */
+                margin: 0;
+                padding: 0;
+            }
+            .foodName {
+                margin-top: 10px;
+            }
+            .foodImageWrap {
+                padding: 50px 50px 0 50px;
+            }
+        </style>
     </head>
     <body onload="mainPageLoad()">
         <section class="title">
@@ -14,61 +37,55 @@
             </div>
         </section>
 
+        <!-- Slider main container -->
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                    <div class="foodImageWrap">
+                        <img class="foodImage" src="" alt="이미지 준비중">
+                    </div>
+                    <h2 class="foodName"></h2>
+                </div>
+                <div class="swiper-slide">
+                    <div class="foodImageWrap">
+                        <img class="foodImage" src="" alt="이미지 준비중">
+                    </div>
+                    <h2 class="foodName"></h2>
+                </div>
+                <div class="swiper-slide">
+                    <div class="foodImageWrap">
+                        <img class="foodImage" src="" alt="이미지 준비중">
+                    </div>
+                    <h2 class="foodName"></h2>
+                </div>
+                <div class="swiper-slide">
+                    <div class="foodImageWrap">
+                        <img class="foodImage" src="" alt="이미지 준비중">
+                    </div>
+                    <h2 class="foodName"></h2>
+                </div>
+                <div class="swiper-slide">
+                    <div class="foodImageWrap">
+                        <img class="foodImage" src="" alt="이미지 준비중">
+                    </div>
+                    <h2 class="foodName"></h2>
+                </div>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+        
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+
         <div class="reroll">
             <button id="rerollBtn">
                 <i class="fa-solid fa-arrow-rotate-right"></i><span>재추천</span>
             </button>
         </div>
-
-        <section class="slidebox">
-            <input type="radio" name="slide" id="slide01" checked>
-            <input type="radio" name="slide" id="slide02">
-            <input type="radio" name="slide" id="slide03">
-            <input type="radio" name="slide" id="slide04">
-            <input type="radio" name="slide" id="slide05">
-            <ul class="slidelist">
-                <li class="slideitem">
-                    <div>
-                        <label for="slide05" class="left"></label>
-                        <label for="slide02" class="right"></label>
-                        <a><img class="foodImage" src=""></a>
-                        <h2 class="foodName"></h2>  <!-- 이미지와 제목이 같은 div 내부에 위치 -->
-                    </div>
-                </li>
-                <li class="slideitem">
-                    <div>
-                        <label for="slide01" class="left"></label>
-                        <label for="slide03" class="right"></label>
-                        <a><img class="foodImage" src=""></a>
-                        <h2 class="foodName"></h2>  <!-- 이미지와 제목이 같은 div 내부에 위치 -->
-                    </div>
-                </li>
-                <li class="slideitem">
-                    <div>
-                        <label for="slide02" class="left"></label>
-                        <label for="slide04" class="right"></label>
-                        <a><img class="foodImage" src=""></a>
-                        <h2 class="foodName"></h2>  <!-- 이미지와 제목이 같은 div 내부에 위치 -->
-                    </div>
-                </li>
-                <li class="slideitem">
-                    <div>
-                        <label for="slide03" class="left"></label>
-                        <label for="slide05" class="right"></label>
-                        <a><img class="foodImage" src=""></a>
-                        <h2 class="foodName"></h2>  <!-- 이미지와 제목이 같은 div 내부에 위치 -->
-                    </div>
-                </li>
-                <li class="slideitem">
-                    <div>
-                        <label for="slide04" class="left"></label>
-                        <label for="slide01" class="right"></label>
-                        <a><img class="foodImage" src=""></a>
-                        <h2 class="foodName"></h2>  <!-- 이미지와 제목이 같은 div 내부에 위치 -->
-                    </div>
-                </li>
-            </ul>
-        </section>
 
         <nav class="nav">
             <ul class="navWrap">
@@ -85,7 +102,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="settings.php">
                         <i class="fas fa-user-gear" style="opacity: 0.2;"></i>
                         <p style="opacity: 0.2;">설정</p>
                     </a>
@@ -111,5 +128,28 @@
         </div>
 
         <script src="./JS/Main.js"></script>
+        <script>
+            const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // And if we need scrollbar
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+            });
+        </script>
     </body>
 </html>
