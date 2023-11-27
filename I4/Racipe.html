@@ -6,18 +6,6 @@
     <link rel="stylesheet" href="./CSS/Recipe.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <title>레시피</title>
-
-    <style>
-        #player {
-            width: 100%;
-        }
-
-        #player iframe {
-            width: 100%;
-            height: 100%; /* 추가: iframe도 100% 높이로 설정 */
-        }
-
-    </style>
 </head>
 <body onload="getRacipeVideoAndContent()"> 
     <!-- 1. 영상이 노출될 영역을 확보한다. api가 제대로 작동하면 <div>에 자동으로 <iframe> 태그가 load될 것 이다. -->
@@ -41,12 +29,12 @@
     <hr>
 
     <div id="ingredientArea">
-        <p>재료</p>
+        <p class="contentTitle">재료</p>
     </div>
     <hr>
 
     <div id="racipeContentArea">
-        <p>조리순서</p>
+        <p class="contentTitle">조리순서</p>
     </div>
 
     <script src="./JS/Racipe.js"></script>

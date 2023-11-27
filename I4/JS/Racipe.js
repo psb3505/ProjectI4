@@ -138,8 +138,12 @@ function createIngredientAndRacipeContent(data) {
     var matches = data[0].ckg_mtrl_cn.match(/\[([^\]]+)\]\s*([^[]+)/g);
 
     matches.forEach(match => {
+        var trimmedMatch = match.replace(/\|\s*$/, ''); 
+        // ']' 뒤에 처음 나온 문자가 '|'이면 처음에 나온 '|' 하나만 제거
+        trimmedMatch = trimmedMatch.replace(/\]\s*\|/, ']');
+        console.log(trimmedMatch);
         // '['와 ']' 사이의 내용을 추출하여 그룹으로 사용
-        var groupMatches = match.match(/\[([^\]]+)\]/g);
+        var groupMatches = trimmedMatch.match(/\[([^\]]+)\]/g);
 
         if (groupMatches) {
             // 중복된 그룹명 제거
@@ -160,33 +164,39 @@ function createIngredientAndRacipeContent(data) {
                 ingredientPart.appendChild(paragraph);
 
                 // '|'로 이어진 문자열을 각각의 행으로 구분하여 table 생성
-                var ingredients = match.split(group)[1].trim().split('|');
+                var ingredients = trimmedMatch.split(group);
 
-                // table 생성
-                var table = document.createElement('table');
+                if (ingredients.length > 1) {
+                    // '|' 이후의 문자열이 있는 경우에만 처리
+                    var values = ingredients[1].trim().split('|');
 
-                ingredients.forEach(ingredient => {
-                    // 각 값의 앞뒤 공백 제거
-                    var trimmedIngredient = ingredient.trim();
+                    // table 생성
+                    var table = document.createElement('table');
 
-                    // 공백으로 분리
-                    var subIngredients = trimmedIngredient.split(' ');
-
-                    // tr 생성
-                    var tr = table.insertRow();
-
-                    subIngredients.forEach(subIngredient => {
+                    values.forEach(value => {
                         // 각 값의 앞뒤 공백 제거
-                        var trimmedSubIngredient = subIngredient.trim();
+                        var trimmedValue = value.trim().replace(/\s+(?=\S*$)/, ',');
+                        console.log(trimmedValue);
 
-                        // td 생성
-                        var td = tr.insertCell();
-                        td.textContent = trimmedSubIngredient;
+                        // 공백으로 분리
+                        var subValues = trimmedValue.split(',');
+
+                        // tr 생성
+                        var tr = table.insertRow();
+
+                        subValues.forEach(subValue => {
+                            // 각 값의 앞뒤 공백 제거
+                            var trimmedSubValue = subValue.trim();
+
+                            // td 생성
+                            var td = tr.insertCell();
+                            td.textContent = trimmedSubValue;
+                        });
                     });
-                });
 
-                // table을 ingredientPart에 추가
-                ingredientPart.appendChild(table);
+                    // table을 ingredientPart에 추가
+                    ingredientPart.appendChild(table);
+                }
 
                 // ingredientPart을 ingredientArea에 추가
                 ingredientArea.appendChild(ingredientPart);
@@ -210,9 +220,6 @@ function createIngredientAndRacipeContent(data) {
 
     subRacipeContent.forEach((content, index) => {
         var li = document.createElement('li');
-        var span = document.createElement('span');
-        span.textContent = (index + 1).toString() + '. '; // 1.부터 시작하는 숫자 값을 span에 넣음
-        li.appendChild(span);
         
         var trimmedContent = content.trim();
         li.textContent += trimmedContent; // 기존 li의 textContent에 새로운 내용 추가

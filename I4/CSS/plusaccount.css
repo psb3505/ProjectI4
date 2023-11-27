@@ -1,0 +1,77 @@
+body{
+	max-width: 100%;
+    overflow-x: hidden;
+}
+.textbox {
+    width: 300px;
+    height: 40px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 1;
+}
+.form_w200,.select{
+	width:115px;
+	font-size: 20px;
+	border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 1;
+}
+/* 추가된 스타일 */
+.gender-box {
+    width: 140px;
+    height: 40px;
+    border: 1px solid #333;
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    color: black;
+	border-radius: 15px;
+}
+
+.selected {
+    background-color: #A9E2F3 !important;
+    color: white;
+}
+
+.footerbox {
+    width: 230px;
+    height: 40px;
+	border:none;
+	border-radius: 15px;
+}
+
+.tdbox {
+    width: 110px;
+	border:none;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+}
+@media (max-width: 450px) {
+    .footerbox {
+		width: 160px;
+		height: 40px;
+		border:none;
+		border-radius: 15px;
+	}
+	.textbox {
+		width: 200px;
+		height: 40px;
+		border-left-width: 0;
+		border-right-width: 0;
+		border-top-width: 0;
+		border-bottom-width: 1;
+	}
+	.gender-box {
+		width: 80px;
+      }
+	.tdbox {
+		width: 110px;
+	}
+}
