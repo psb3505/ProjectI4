@@ -11,6 +11,16 @@ h2 {
 	 text-align: center;
 }
 
+img {
+	text-align: center;
+}
+
+.food-preference img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover; /* 이미지 비율 유지 */
+}
+
 .header {
     background-color: #ff9900;
     color: white;

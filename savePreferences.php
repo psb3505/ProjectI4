@@ -1,61 +1,71 @@
-<!-- PHP 파일 (savePreferences.php) -->
-
 <?php
 @session_start();
 
-// 로그인 세션이 없으면 에러 응답
-if (!isset($_SESSION['ID'])) {
-    http_response_code(401);
-    exit("Unauthorized");
+$host = "192.168.1.3";
+$user = "dbuser191831";
+$pw = "ce1234";
+$dbName = "db191831";
+
+$mysqli = new mysqli($host, $user, $pw, $dbName, "3306");
+
+// 연결 오류 체크
+if ($mysqli->connect_error) {
+    die("MySQL 연결 실패: " . $mysqli->connect_error);
 }
 
+// POST로 전송된 음식 선호도 데이터 처리
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $servername = "azza.gwangju.ac.kr";
-    $username = "dbuser191831";
-    $password = "ce1234";
-    $dbname = "db191831";
+    try {
+        // 사용자 ID
+        $user_id = $_SESSION['ID'];
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
+        // SQL 쿼리 준비
+        $sql = "INSERT INTO preference_rating (user_id, food_id, rating) VALUES (?, ?, ?)
+				ON DUPLICATE KEY UPDATE rating = VALUES(rating)";
+        $stmt = $mysqli->prepare($sql);
 
-    if ($conn->connect_error) {
-        http_response_code(500);
-        exit("Connection failed: " . $conn->connect_error);
-    }
+        // 음식 선호도 데이터 처리
+        for ($i = 1; $i <= 30; $i++) {
+            $preference = isset($_POST['preference' . $i]) ? $_POST['preference' . $i] : null;
 
-    // 사용자 ID
-    $user_id = $_SESSION['ID'];
+            // 값과 음식 ID 분리
+            list($food_id, $rating) = explode('_', $preference);
 
-    // 전송된 데이터 디코딩
-    $requestData = json_decode(file_get_contents("php://input"), true);
+            // 데이터베이스에 저장
+            $stmt->bind_param("iss", $user_id, $food_id, $rating);
+            $result = $stmt->execute();
 
-    // 각 라디오 버튼의 값 처리
-    foreach ($requestData as $data) {
-        $food_id = $data['food_id'];
-        $rating = $data['rating'];
-
-        // SQL 쿼리 실행 (preference_rating 테이블에 데이터 삽입)
-        $sql = "INSERT INTO preference_rating (user_id, food_id, rating) VALUES ('$user_id', '$food_id', '$rating')";
-
-        if ($conn->query($sql) !== TRUE) {
-            http_response_code(500);
-            exit("Error: " . $sql . "<br>" . $conn->error);
+            if (!$result) {
+                if ($mysqli->errno == 1062) {
+                    // 중복된 키 에러 (1062) 처리
+                    // 여기에서 중복된 키 에러에 대한 추가 처리를 할 수 있습니다.
+                    // 예를 들어, 업데이트 쿼리를 따로 수행하거나 다른 조치를 취할 수 있습니다.
+                    // 현재는 에러를 던지고 있습니다.
+                    echo json_encode(array("error" => "Duplicate key error: " . $stmt->error));
+                } else {
+                    // 다른 에러 처리
+                    echo json_encode(array("error" => "Error saving preference: " . $stmt->error));
+                }
+				exit();
+            }
         }
+
+        // 선호도 저장이 완료되면 리다이렉트 또는 응답을 보낼 수 있음
+        header("Location: ./Main.html");
+        exit();
+    } catch (Exception $e) {
+        echo '<script>';
+        echo 'alert("선호도 저장에 실패하였습니다. 에러 메시지: ' . $e->getMessage() . '");';
+        echo 'location.href = "Ytest4.php";';
+        echo '</script>';
     }
-	
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ... (기존 코드)
 
-    $conn->close();
-
-    // 서버 응답에 대한 추가 정보를 JSON 형식으로 출력
-    echo json_encode(['status' => 'success', 'message' => 'Preferences saved successfully']);
-} else {
-    http_response_code(405);
-    exit("Method Not Allowed");
+    // 리소스 해제
+    $stmt->close();
+    $mysqli->close();
 }
-
-    $conn->close();
-} else {
+else {
+    // POST 요청이 아닌 경우에 대한 처리
     http_response_code(405);
     exit("Method Not Allowed");
 }
