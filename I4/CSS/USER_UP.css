@@ -1,0 +1,173 @@
+.readon{
+background-color : #A4A4A4;
+} 
+.textbox {
+    width: 300px;
+    height: 40px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 1;
+}
+
+.tdbox {
+    width: 110px;
+	border:none;
+}
+.footerbox {
+    width: 400px;
+    height: 40px;
+	border:none;
+	border-radius: 15px;
+}
+.Logo{
+	position:absolute;
+	top : 40%;
+	left : 50%;
+	margin: -50px 0px 0px -200px;
+	text-align:center;
+	font-size:20px;
+
+}
+h1{
+	text-align:center;
+}
+.UP{
+	position:absolute;
+	top:270px;
+	left:280px;
+}
+.title {
+    background-image: url('../Image/title.jpg');
+    background-size: cover; /* 배경 이미지를 요소에 맞게 늘리거나 축소 */
+    background-position: center; /* 배경 이미지의 위치를 가운데 정렬 */
+    color: #fff;
+    text-align: center;
+    padding: 20px 0; /* 위아래 여백을 늘림 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.titlename {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0; /* 기본적인 마진 제거 */
+    padding: 10px; /* 내부 여백을 추가 */
+    background-color: rgba(0, 0, 0, 0.7); /* 제목의 배경 색상과 투명도 설정 */
+    border-radius: 5px; /* 테두리 모서리를 둥글게 만듦 */
+}
+.settings-container{
+	background-size: cover; /* 배경 이미지를 요소에 맞게 늘리거나 축소 */
+    background-position: center; /* 배경 이미지의 위치를 가운데 정렬 */
+    padding: 20px 0; /* 위아래 여백을 늘림 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.settingsButton{
+	font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0; /* 기본적인 마진 제거 */
+    padding: 10px; /* 내부 여백을 추가 */
+    border-radius: 5px; /* 테두리 모서리를 둥글게 만듦 */
+}
+/* 메뉴바 */
+.nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff; /* 메뉴 바 배경 색상을 흰색으로 변경 */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    z-index: 1000; /* 다른 요소 위로 메뉴 바를 올리기 위해 z-index 설정 */
+}
+
+.navWrap {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    list-style: none;
+    margin: 0;
+}
+
+.navWrap li {
+    text-align: center;
+    color: #333; /* 진한 회색으로 변경 */
+}
+
+.navWrap i {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.navWrap p {
+    margin: 0;
+    font-size: 14px; /* 텍스트 크기 조절 */
+}
+
+.reroll {
+    text-align: center;
+}
+
+#rerollBtn {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: #3498db;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+#rerollBtn span {
+    margin-left: 5px;
+}
+
+/* 모바일에서 터치 피드백 추가 */
+#rerollBtn:active {
+    background-color: #2980b9;
+}
+
+a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: inherit; /* 기본 색상 유지 */
+}
+@media (max-width: 768px) {
+	.title{
+		box-sizing: border-box;
+        padding: 10px;	
+	}
+    .Logo {
+		top:40%;
+		left:20%:
+        margin: 0;
+		box-sizing: border-box;
+        padding: 10px;		
+    }
+	@media (max-width: 420px) {
+	.title{
+	box-sizing: border-box;
+    padding: 10px;	
+	}
+    .Logo {
+		top:40%;
+		left:60%;
+    }
+	.textbox {
+    width: 200px;
+	}
+
+	.tdbox {
+		width: 100px;
+		border:none;
+	}
+	.footerbox {
+		width: 280px;
+	}	
+}
+}
