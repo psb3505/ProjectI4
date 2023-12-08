@@ -1,14 +1,16 @@
 <?php
-    // 세션 시작
-    // session_start();
+// 세션 시작
+session_start();
 
-    // // $_SESSION['NAME'] 값 확인
-    // if(isset($_SESSION['NAME'])) {
-    //     $user_id = $_SESSION['NAME'];
-    //     var_dump($user_id);
-    // } else {
-    //     echo "Name session variable not set.";
-    // }
+// 세션에서 user_id 값을 가져옴
+if (isset($_SESSION['ID'])) {
+    $user_id = $_SESSION['ID'];
+} else {
+    // 세션에 user_id가 없는 경우에 대한 처리
+    // 예: 로그인 페이지로 리다이렉션 또는 다른 처리
+    echo "User ID session variable not set.";
+    exit(); // Terminate the script if user ID is not set
+}
 
     function DBConnect() {
         // MySQL 서버에 연결
@@ -23,6 +25,7 @@
     }
 
     function getFoodName() {
+        global $user_id;
         $conn = DBConnect();
 
         // $foodName 변수 초기화
@@ -40,12 +43,12 @@
             $checkQueryWithStatus = "SELECT COUNT(*) AS count
                                     FROM preference_rating
                                     WHERE rating $condition
-                                    AND user_id = 'sb'
+                                    AND user_id = '$user_id'
                                     AND recommendationStatus = 'Y'";
             $checkQueryWithoutStatus = "SELECT COUNT(*) AS count
                                         FROM preference_rating
                                         WHERE rating $condition
-                                        AND user_id = 'sb'";
+                                        AND user_id = '$user_id'";
             
             $checkResultWithStatus = mysqli_query($conn, $checkQueryWithStatus);
             $checkResultWithoutStatus = mysqli_query($conn, $checkQueryWithoutStatus);
@@ -67,7 +70,7 @@
                     $updateQuery = "UPDATE preference_rating
                                     SET recommendationStatus = 'N'
                                     WHERE rating $condition
-                                    AND user_id = 'sb'";
+                                    AND user_id = '$user_id'";
                     $updateResult = mysqli_query($conn, $updateQuery);
 
                     if (!$updateResult) {
@@ -79,7 +82,7 @@
                 $selectQuery = "SELECT food.name as name
                                 FROM food
                                 JOIN preference_rating ON food.id = preference_rating.food_id
-                                WHERE preference_rating.user_id = 'sb'
+                                WHERE preference_rating.user_id = '$user_id'
                                 AND preference_rating.recommendationStatus = 'N'
                                 AND preference_rating.rating $condition
                                 ORDER BY RAND()
@@ -95,7 +98,7 @@
                         $updateQuery = "UPDATE preference_rating
                                         SET recommendationStatus = 'Y'
                                         WHERE food_id IN (SELECT id FROM food WHERE name = '$foodName')
-                                        AND user_id = 'sb'";
+                                        AND user_id = '$user_id'";
                         $updateResult = mysqli_query($conn, $updateQuery);
                 
                         if (!$updateResult) {

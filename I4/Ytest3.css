@@ -1,0 +1,118 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    /*background-color: #f4f4f4;*/
+	background-color: #F5DA81;
+}
+
+
+h2 {
+	 text-align: center;
+}
+
+img {
+	text-align: center;
+}
+
+.prefer {
+	position : absolute;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.food-preference img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover; /* 이미지 비율 유지 */
+}
+
+.header {
+    background-color: #ff9900;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.surveyForm {
+	text-align: center;
+}
+
+.step-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.step {
+    display: inline-block;
+    margin: 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+
+.now_step {
+	display: inline-block;
+    margin: 0 10px;
+    font-size: 18px;
+	color : orange;
+}
+
+.active-step {
+    color: #ff9900;
+    font-weight: bold;
+}
+
+.ok {
+    width: 230px;
+    height: 40px;
+	border:none;
+	border-radius: 15px;
+}
+
+
+
+
+
+.form_radio_btn {
+    width: 60px;
+    height : 30px;
+	font-size : 11px;
+    border: 1px solid #EAE7E7;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative; /* 추가: 상대적인 위치 설정 */
+    display: inline-block; /* 추가: 인라인 블록 요소로 표시 */
+}
+.form_radio_btn input[type=radio] {
+    opacity: 0;
+    position: absolute;
+}
+.form_radio_btn label {
+    display: flex;
+    align-items: center; /* 추가: 세로 방향 가운데 정렬 */
+    justify-content: center; /* 추가: 가로 방향 가운데 정렬 */
+    border-radius: 10px;
+       margin: 0 auto;
+    text-align: center;
+    height: 100%;
+    line-height: 45px;
+    cursor: pointer;
+}
+
+/* Checked */
+.form_radio_btn input[type=radio]:checked + label {
+    background: #f79605;
+    color: #fff;
+}
+ 
+/* Hover */
+.form_radio_btn label:hover {
+    color: #666;
+}
+ 
+/* Disabled */
+.form_radio_btn input[type=radio] + label {
+    background: #F9FAFC;
+    color: #666;
+}
