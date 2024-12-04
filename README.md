@@ -1,4 +1,6 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&height=250&color=gradient&text=개인%20맞춤형%0A음식%20추천%20시스템&fontAlignY=40" />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=250&color=gradient&text=개인%20맞춤형%20%0A음식%20추천%20시스템&fontAlignY=40&fontSize=40" />
+
+
 
 # 🌐 Implement
 <div align=left>
