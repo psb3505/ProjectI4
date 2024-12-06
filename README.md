@@ -4,7 +4,7 @@
 
 # 🌐 Implement
 <div align=left>
-  <img src="https://github.com/user-attachments/assets/b0db3ef2-686b-4cd7-bc23-2ca3484e857b">
+  <img src="https://github.com/user-attachments/assets/b0db3ef2-686b-4cd7-bc23-2ca3484e857b" width="320" height="480" alt="이미지">
 
 </div>
 
