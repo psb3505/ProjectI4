@@ -35,3 +35,7 @@
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">  
   <br>
 </div>
+
+# 💡 Links
+
+✔️ [컨텐츠 기반 필터링 코드 바로가기](https://github.com/psb3505/ProjectI4/blob/main/CBFiltering.ipynb)
