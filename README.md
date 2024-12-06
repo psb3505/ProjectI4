@@ -1,7 +1,9 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&height=250&color=gradient&text=개인%20맞춤형%20%0A음식%20추천%20시스템&fontAlignY=40&fontSize=60" />
 
+<h3>이 시스템은 초기 회원가입 시 사용자의 50가지 음식 선호도를 조사합니다. 수집된 데이터를 기반으로 컨텐츠 기반 필터링을 적용하여, 개인 맞춤형으로 가장 선호도가 높은 상위 5가지 음식을 추천해주는 웹 애플리케이션입니다.</h3>
+<h3>음식 추천 기능은 Python을 활용해 음식 데이터를 CountVectorizer로 벡터화하고, 코사인 유사도를 계산하여 음식 간의 유사성을 측정하고 유사도 데이터를 JSON 파일로 생성해 웹과 연동 가능한 형태로 구현했습니다.</h3>
 
-
+<br>
 # 🌐 Main Screen
 <div align=left>
   <img src="https://github.com/user-attachments/assets/b0db3ef2-686b-4cd7-bc23-2ca3484e857b" width="320" height="480" alt="이미지">
